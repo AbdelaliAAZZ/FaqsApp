@@ -12,7 +12,7 @@ A responsive FAQ accordion component built with React. Users can click to expand
 - 💫 Smooth expand/collapse animations
 - 🎨 Clean and modern design
 - 📱 Fully responsive layout
-- 🔢 Numbered questions for easy reference
+
 
 ## Technologies Used
 
