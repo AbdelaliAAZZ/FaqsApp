@@ -4,7 +4,8 @@
 
 A responsive FAQ accordion component built with React. Users can click to expand/collapse answers to frequently asked questions about furniture products.
 
-![FAQ Accordion Preview](./preview.png)[2 preview](./preview2.png)
+![FAQ Accordion Preview](./preview.png)
+![2 preview](./preview2.png)
 
 ## Features
 
