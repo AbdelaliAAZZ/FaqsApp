@@ -4,7 +4,7 @@
 
 A responsive FAQ accordion component built with React. Users can click to expand/collapse answers to frequently asked questions about furniture products.
 
-![FAQ Accordion Preview](./preview.png)
+![FAQ Accordion Preview](./preview.png)[2](./prewiew2.png)
 
 ## Features
 
@@ -24,11 +24,11 @@ A responsive FAQ accordion component built with React. Users can click to expand
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/AbdelaliAAZZ/Flash-cards.git 
+git clone https://github.com/AbdelaliAAZZ/FaqsApp.git 
 ```
 2. Navigate to project directory:
 ```bash
-cd flash-cards
+cd faqs-app
 ```
 3. Install dependencies:
  ```bash
