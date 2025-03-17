@@ -1,16 +1,20 @@
-import { useState } from "react";
 
-function Accordion({ todo }) {
-  const [isOpen, setIsOpen] = useState(false);
+
+function Accordion({index,text,title,isOpen,handleOpen }) {
+
+
+
+     
+
 
   return (
-    <div className={isOpen ? `item open` : `item`}>
-      <p className="number">0{todo.id}</p>
-      <p className="title">{todo.title}</p>
-      <p className="icon" onClick={() => setIsOpen(!isOpen)}>
+    <div className={`item ${isOpen ? "open" : ""}`} onClick={()=>handleOpen(index)}>
+      <p className="number">0{index+1}</p>
+      <p className="title">{title}</p>
+      <p className="icon" >
         {isOpen ? "-" : "+"}
       </p>
-      {isOpen ? <div className="content-box">{todo.text}</div> : ""}
+      {isOpen ? <div className="content-box">{text}</div> : ""}
     </div>
   );
 }
