@@ -169,7 +169,7 @@ function App() {
             </motion.button>
           </div>
           <p className="subtitle">
-            Leading digital agency based in Morocco, specializing in web development, UI/UX design, and digital marketing.
+            Leading digital agency based in Morocco, specializing in web development, UI/UX design, and Fullstack websites.
             Find answers to commonly asked questions about our services below.
           </p>
         </header>
