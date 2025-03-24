@@ -1,108 +1,145 @@
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
 
-function Pagination({ currentPage, totalPages, setCurrentPage }) {
-  const pageNumbers = [];
-  
-  // Fix: Create array for all page numbers
-  for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
-  }
-  
-  // Fix: Ensure current page is within bounds
-  useEffect(() => {
-    if (currentPage > totalPages) {
-      setCurrentPage(Math.max(1, totalPages));
+const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
+  // Generate page numbers for pagination
+  const getPageNumbers = () => {
+    const pages = [];
+    // Always show first page
+    pages.push(1);
+    
+    // Calculate range of pages to show around current page
+    let startPage = Math.max(2, currentPage - 1);
+    let endPage = Math.min(totalPages - 1, currentPage + 1);
+    
+    // If we're at the start, show more pages after
+    if (currentPage <= 2) {
+      endPage = Math.min(totalPages - 1, 4);
     }
-  }, [currentPage, totalPages, setCurrentPage]);
-  
-  // Logic to show limited page numbers with ellipsis
-  let pagesToShow = [];
-  
-  if (totalPages <= 5) {
-    pagesToShow = pageNumbers;
-  } else {
-    if (currentPage <= 3) {
-      pagesToShow = [1, 2, 3, 4, '...', totalPages];
-    } else if (currentPage >= totalPages - 2) {
-      pagesToShow = [1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
-    } else {
-      pagesToShow = [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
+    
+    // If we're at the end, show more pages before
+    if (currentPage >= totalPages - 1) {
+      startPage = Math.max(2, totalPages - 3);
     }
-  }
-  
+    
+    // Add "..." before middle pages if needed
+    if (startPage > 2) {
+      pages.push("...");
+    }
+    
+    // Add middle pages
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+    
+    // Add "..." after middle pages if needed
+    if (endPage < totalPages - 1) {
+      pages.push("...");
+    }
+    
+    // Always show last page if there is more than one page
+    if (totalPages > 1) {
+      pages.push(totalPages);
+    }
+    
+    return pages;
+  };
+
+  // Handle page changes
+  const handlePageChange = (page) => {
+    // Don't do anything if clicking on current page or ellipsis
+    if (page === currentPage || page === "...") return;
+    
+    // Set new page
+    setCurrentPage(page);
+    
+    // Scroll to top of results
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Handle previous page
+  const goToPrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  // Handle next page
+  const goToNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  // Don't show pagination if only one page
+  if (totalPages <= 1) return null;
+
   return (
-    <motion.div 
-      className="pagination"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
-      <motion.button 
+    <div className="pagination">
+      <button
         className="page-btn prev"
-        onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+        onClick={goToPrevPage}
         disabled={currentPage === 1}
-        whileHover={currentPage !== 1 ? { scale: 1.05, x: -3 } : {}}
-        whileTap={currentPage !== 1 ? { scale: 0.95 } : {}}
+        aria-label="Previous page"
       >
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 24 24" 
-          width="16" 
-          height="16" 
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <line x1="19" y1="12" x2="5" y2="12"></line>
-          <polyline points="12 19 5 12 12 5"></polyline>
+          <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
-        Prev
-      </motion.button>
-      
-      {pagesToShow.map((page, index) => (
-        page === '...' ? (
-          <span key={`ellipsis-${index}`} className="ellipsis">...</span>
-        ) : (
+      </button>
+
+      <div className="page-numbers">
+        {getPageNumbers().map((page, index) => (
           <motion.button
-            key={page}
-            className={`page-btn ${currentPage === page ? 'active' : ''}`}
-            onClick={() => setCurrentPage(page)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
+            key={`${page}-${index}`}
+            className={`page-btn ${page === currentPage ? "active" : ""} ${
+              page === "..." ? "disabled" : ""
+            }`}
+            onClick={() => handlePageChange(page)}
+            whileHover={page !== "..." ? { scale: 1.1 } : {}}
+            whileTap={page !== "..." ? { scale: 0.95 } : {}}
+            disabled={page === "..."}
           >
             {page}
           </motion.button>
-        )
-      ))}
-      
-      <motion.button 
+        ))}
+      </div>
+
+      <button
         className="page-btn next"
-        onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+        onClick={goToNextPage}
         disabled={currentPage === totalPages}
-        whileHover={currentPage !== totalPages ? { scale: 1.05, x: 3 } : {}}
-        whileTap={currentPage !== totalPages ? { scale: 0.95 } : {}}
+        aria-label="Next page"
       >
-        Next
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 24 24" 
-          width="16" 
-          height="16" 
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-          <polyline points="12 5 19 12 12 19"></polyline>
+          <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
-      </motion.button>
-    </motion.div>
+      </button>
+    </div>
   );
-}
+};
+
+Pagination.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  setCurrentPage: PropTypes.func.isRequired
+};
 
 export default Pagination; 
