@@ -202,40 +202,69 @@ function Navbar({ darkMode, toggleTheme, onContactClick }) {
           {/* Theme Toggle Button and Mobile Menu */}
           <div className="flex items-center gap-4 z-30">
             <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleTheme} />
-            {/* Mobile Menu Button with advanced animation */}
+            
+            {/* Professional Mobile Menu Button with Advanced Animation */}
             <motion.button 
-              className={`md:hidden p-3 rounded-full shadow-xl ${darkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-800 hover:bg-gray-200'} focus:outline-none transition-transform`} 
+              className={`md:hidden p-3 rounded-full shadow-xl ${
+                darkMode 
+                  ? 'bg-gray-900 text-white hover:bg-gray-800' 
+                  : 'bg-white text-gray-800 hover:bg-gray-100'
+              } focus:outline-none transition-transform relative`}
               onClick={toggleMobileMenu}
               aria-label="Toggle menu"
-              whileHover={{ scale: 1.15 }}
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
               <motion.div
                 initial={false}
-                animate={mobileMenuOpen ? { rotate: 90 } : { rotate: 0 }}
-                transition={{ duration: 0.3 }}
+                animate={{
+                  rotate: mobileMenuOpen ? 90 : 0,
+                  transition: { 
+                    type: "spring", 
+                    stiffness: 300, 
+                    damping: 20 
+                  }
+                }}
+                className="relative w-6 h-6 flex flex-col justify-center items-center"
               >
-                {mobileMenuOpen ? (
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    className="h-6 w-6" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                ) : (
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    className="h-6 w-6" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                )}
+                {/* Hamburger Lines with Unique Animation */}
+                <motion.span
+                  className="absolute top-0 w-6 h-0.5 bg-current"
+                  initial={false}
+                  animate={{
+                    y: mobileMenuOpen ? 12 : 0,
+                    rotate: mobileMenuOpen ? 45 : 0,
+                    transition: { 
+                      type: "spring", 
+                      stiffness: 300, 
+                      damping: 20 
+                    }
+                  }}
+                />
+                <motion.span
+                  className="absolute top-1/2 w-6 h-0.5 bg-current transform -translate-y-1/2"
+                  initial={false}
+                  animate={{
+                    opacity: mobileMenuOpen ? 0 : 1,
+                    transition: { 
+                      type: "spring", 
+                      stiffness: 300 
+                    }
+                  }}
+                />
+                <motion.span
+                  className="absolute bottom-0 w-6 h-0.5 bg-current"
+                  initial={false}
+                  animate={{
+                    y: mobileMenuOpen ? -12 : 0,
+                    rotate: mobileMenuOpen ? -45 : 0,
+                    transition: { 
+                      type: "spring", 
+                      stiffness: 300, 
+                      damping: 20 
+                    }
+                  }}
+                />
               </motion.div>
             </motion.button>
           </div>
