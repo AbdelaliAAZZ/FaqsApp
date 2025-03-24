@@ -97,16 +97,12 @@ const ContactSection = ({ onSubmit }) => {
             </p>
           </div>
           
-          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 md:p-8 transition-colors duration-300" 
-               style={{ backgroundColor: document.documentElement.classList.contains('dark') ? '#121212' : '#ffffff' }}>
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 md:p-8 transition-colors duration-300">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               <div 
                 className={`contact-method ${activeMethod === 'whatsapp' ? 'active' : ''} transition-colors duration-300`}
                 onClick={() => handleMethodChange('whatsapp')}
-                style={{ 
-                  backgroundColor: document.documentElement.classList.contains('dark') ? '#1a1a1a' : '#ffffff',
-                  borderColor: document.documentElement.classList.contains('dark') ? '#333333' : ''
-                }}
+                style={{ backgroundColor: document.documentElement.classList.contains('dark') ? '#1f1f1f' : '#ffffff' }}
               >
                 <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white mr-3">
                   <svg 
@@ -132,10 +128,7 @@ const ContactSection = ({ onSubmit }) => {
               <div 
                 className={`contact-method ${activeMethod === 'email' ? 'active' : ''} transition-colors duration-300`}
                 onClick={() => handleMethodChange('email')}
-                style={{ 
-                  backgroundColor: document.documentElement.classList.contains('dark') ? '#1a1a1a' : '#ffffff',
-                  borderColor: document.documentElement.classList.contains('dark') ? '#333333' : ''
-                }}
+                style={{ backgroundColor: document.documentElement.classList.contains('dark') ? '#1f1f1f' : '#ffffff' }}
               >
                 <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white mr-3">
                   <svg 
@@ -171,11 +164,7 @@ const ContactSection = ({ onSubmit }) => {
                   onChange={handleChange}
                   className={`form-control ${errors.name ? 'border-red-500 dark:border-red-500' : ''}`}
                   placeholder="Enter your name"
-                  style={{ 
-                    backgroundColor: document.documentElement.classList.contains('dark') ? '#1a1a1a' : '#ffffff',
-                    color: document.documentElement.classList.contains('dark') ? '#ffffff' : '#333333',
-                    borderColor: document.documentElement.classList.contains('dark') ? '#333333' : ''
-                  }}
+                  style={{ backgroundColor: document.documentElement.classList.contains('dark') ? '#1f1f1f' : '#ffffff' }}
                 />
                 {errors.name && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.name}</p>}
               </div>
@@ -190,11 +179,7 @@ const ContactSection = ({ onSubmit }) => {
                   onChange={handleChange}
                   className={`form-control ${errors.email ? 'border-red-500 dark:border-red-500' : ''}`}
                   placeholder="Enter your email"
-                  style={{ 
-                    backgroundColor: document.documentElement.classList.contains('dark') ? '#1a1a1a' : '#ffffff',
-                    color: document.documentElement.classList.contains('dark') ? '#ffffff' : '#333333',
-                    borderColor: document.documentElement.classList.contains('dark') ? '#333333' : ''
-                  }}
+                  style={{ backgroundColor: document.documentElement.classList.contains('dark') ? '#1f1f1f' : '#ffffff' }}
                 />
                 {errors.email && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.email}</p>}
               </div>
@@ -210,11 +195,7 @@ const ContactSection = ({ onSubmit }) => {
                     onChange={handleChange}
                     className={`form-control ${errors.phone ? 'border-red-500 dark:border-red-500' : ''}`}
                     placeholder="Enter your WhatsApp number"
-                    style={{ 
-                      backgroundColor: document.documentElement.classList.contains('dark') ? '#1a1a1a' : '#ffffff',
-                      color: document.documentElement.classList.contains('dark') ? '#ffffff' : '#333333',
-                      borderColor: document.documentElement.classList.contains('dark') ? '#333333' : ''
-                    }}
+                    style={{ backgroundColor: document.documentElement.classList.contains('dark') ? '#1f1f1f' : '#ffffff' }}
                   />
                   {errors.phone && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.phone}</p>}
                 </div>
@@ -229,11 +210,7 @@ const ContactSection = ({ onSubmit }) => {
                   onChange={handleChange}
                   className={`form-control h-32 resize-none ${errors.message ? 'border-red-500 dark:border-red-500' : ''}`}
                   placeholder="Describe your question or issue"
-                  style={{ 
-                    backgroundColor: document.documentElement.classList.contains('dark') ? '#1a1a1a' : '#ffffff',
-                    color: document.documentElement.classList.contains('dark') ? '#ffffff' : '#333333',
-                    borderColor: document.documentElement.classList.contains('dark') ? '#333333' : ''
-                  }}
+                  style={{ backgroundColor: document.documentElement.classList.contains('dark') ? '#1f1f1f' : '#ffffff' }}
                 ></textarea>
                 {errors.message && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.message}</p>}
               </div>
@@ -248,10 +225,6 @@ const ContactSection = ({ onSubmit }) => {
                 type="submit"
                 className="form-submit-btn transition-colors duration-300"
                 disabled={isSubmitting}
-                style={{ 
-                  backgroundColor: '#2AC9A8',
-                  boxShadow: document.documentElement.classList.contains('dark') ? '0 0 15px rgba(42, 201, 168, 0.3)' : 'none'
-                }}
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center">
